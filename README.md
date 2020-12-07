@@ -2,7 +2,7 @@
 
 ## Usage
 
--   `npm install` or `yarn` to install dependencies
+-   `npm install` to install dependencies
 -   create a `.env` file
 -   Add the following properties
     -   USERNAME -> your bugsnag username
