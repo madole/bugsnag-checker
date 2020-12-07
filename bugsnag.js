@@ -48,17 +48,31 @@ const createTagNameEngine = () => ({
     await page.keyboard.type(PASSWORD);
     await page.click('tag=button >> text="Sign in"');
     await page.waitForNavigation();
-    const stabiltyScore = await page.$eval(".StabilityScore-score", (div) =>
-        parseFloat(div.innerText),
+    const stabiltyScore = await page.$$eval(
+        ".ReleaseSummaryCard-metric",
+        (divs) => {
+            const div = divs[1].innerText;
+            const text = div
+                .replace("Session stability\n", "")
+                .replace("%", "");
+            return parseFloat(text);
+        },
     );
 
     const emoji = stabiltyScore < 98.5 ? "🚨" : "💚";
     const icon = stabiltyScore < 98.5 ? "./bug.png" : "./slug.png";
 
-    notifier.notify({
-        title: "BUGSNAG: Stablity Score",
-        message: `${emoji} ${stabiltyScore}%`,
-        icon: path.join(__dirname, icon),
-    });
+    notifier.notify(
+        {
+            title: "BUGSNAG: Stablity Score",
+            message: `${emoji} ${stabiltyScore}%`,
+            icon: path.join(__dirname, icon),
+        },
+        function (err, response, metadata) {
+            console.log(err);
+            console.log(response);
+            console.log(metadata);
+        },
+    );
     await browser.close();
 })();
