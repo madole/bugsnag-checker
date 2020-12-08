@@ -15,4 +15,4 @@ Example
 
 `30 10 * * 1-5 /usr/local/bin/node /Users/******/bugsnag-checker/bugsnag.js`
 
-[screenshot](./screenshot.png)
+![screenshot](./screenshot.png)
