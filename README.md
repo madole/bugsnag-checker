@@ -14,3 +14,5 @@ Set up a cron job to call `bugsnag.js` every day to get notified of your stabili
 Example
 
 `30 10 * * 1-5 /usr/local/bin/node /Users/******/bugsnag-checker/bugsnag.js`
+
+[screenshot](./screenshot.png)
